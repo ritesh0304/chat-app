@@ -38,4 +38,10 @@ userSchema.pre('save',async function(next){
     this.password = await bcrypt.hash(this.password, 10)
     next();
 })
+userSchema.methods.isPasswordCheck=async function(password){
+    console.log(password, this.password)
+    const x=await bcrypt.compare(password,this.password );
+    console.log(x);
+    return x;
+}
 export const User=mongoose.model("User",userSchema);

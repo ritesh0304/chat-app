@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './pages/Login';
 import Bills from './pages/Bills';
 import Register from './pages/Register';
+import SetAvatar from './pages/SetAvatar';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: 'login',
     element: <Login />
+  },
+  {
+    path: 'setAvatar',
+    element: <SetAvatar />
   },
   {
     path: '/bills',

@@ -30,7 +30,7 @@ export const login=async (req,res,next)=>{
     next(error)
   }
   }
-export const register=async (req,res)=>{
+export const register=async (req,res,next)=>{
 try {
     const {username, email, password}=req.body;
     const usernameCheck= await User.findOne({username})
@@ -75,4 +75,15 @@ export const setAvatar= async(req,res,next)=>{
   } catch (error) {
     next(error);
   }
+}
+
+export const allUsers= async (req,res,next)=>{
+ try {
+  const users=(await User.find({_id:{$ne:req.params.id}}))
+  .select(["email","username","avatarImage","_id"
+  ])
+  return res.json(users);
+ } catch (error) {
+   next(error);
+ }
 }

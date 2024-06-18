@@ -38,7 +38,7 @@ function Register() {
             toast.error(response.data.msg, toastOptions);
           }
           if(response.data.status === true){
-            localStorage.setItem('chat-app-user',JSON.stringify(response.data))
+            localStorage.setItem('chat-app-user',JSON.stringify(response.data.user))
             navigate('/');
           }
 

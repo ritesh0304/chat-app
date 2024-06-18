@@ -47,43 +47,53 @@ try {
           status:false,
       })
     }
-    const user=await User.create({
+    const existedUser=await User.create({
       username,
       email,
       password
     })
-    const existedUser=await User.findById(user._id).select("-password")
-    console.log(existedUser);
-    return res.json({status:true,existedUser})
+    const user=await User.findById(existedUser._id).select("-password")
+    return res.json({status:true,user})
 } catch (error) {
   next(error)
 }
 }
-
-export const setAvatar= async(req,res,next)=>{
+export const setAvatar = async (req, res, next) => {
   try {
-    const userId=req.params.id;
-    const avatarImage=req.body.image;
-    const userData =await User.findByIdAndUpdate(userId,{
-      isAvatarImageSet:true,
-      avatarImage,
-    })
+    const userId = req.params.id;
+    const avatarImage = req.body.image;
+    const userData = await User.findByIdAndUpdate(
+      userId,
+      {
+        isAvatarImageSet: true,
+        avatarImage,
+      },
+      { new: true } // This option ensures the updated document is returned
+    );
+
+    if (!userData) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
     return res.json({
-      isSet:userData.isAvatarImageSet,
-      image:userData.avatarImage
-    })
+      isSet: userData.isAvatarImageSet,
+      image: userData.avatarImage,
+    });
   } catch (error) {
     next(error);
   }
-}
+};
 
-export const allUsers= async (req,res,next)=>{
- try {
-  const users=(await User.find({_id:{$ne:req.params.id}}))
-  .select(["email","username","avatarImage","_id"
-  ])
-  return res.json(users);
- } catch (error) {
-   next(error);
- }
-}
+export const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.find({ _id: { $ne: req.params.id } }).select([
+      "email",
+      "username",
+      "avatarImage",
+      "_id",
+    ]);
+    return res.json(users);
+  } catch (ex) {
+    next(ex);
+  }
+};

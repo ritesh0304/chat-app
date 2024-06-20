@@ -130,7 +130,7 @@ function SetAvatar() {
 }
 
 const Container = styled.div`
-  display: flex;
+    display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -140,7 +140,7 @@ const Container = styled.div`
   width: 100vw;
 
   .loader {
-    max-width: 100%;
+    max-inline-size: 100%;
   }
 
   .title-container {
@@ -148,7 +148,6 @@ const Container = styled.div`
       color: white;
     }
   }
-
   .avatars {
     display: flex;
     gap: 2rem;
@@ -161,18 +160,15 @@ const Container = styled.div`
       justify-content: center;
       align-items: center;
       transition: 0.5s ease-in-out;
-
       img {
         height: 6rem;
         transition: 0.5s ease-in-out;
       }
     }
-
     .selected {
       border: 0.4rem solid #4e0eff;
     }
   }
-
   .submit-btn {
     background-color: #4e0eff;
     color: white;

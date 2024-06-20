@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { toast, ToastContainer } from "react-toastify";
 import Logo from "../assets/logo.svg";
 
-function Contacts({ contacts, currentUser }) {
+function Contacts({ contacts, currentUser , changeChat}) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelectedChat, setCurrentSelectedChat] = useState(undefined);
@@ -15,7 +15,10 @@ function Contacts({ contacts, currentUser }) {
     }
   }, [currentUser]);
 
-  const changeCurrentChat = (index, contact) => {};
+  const changeCurrentChat = (index, contact) => {
+    setCurrentSelectedChat(index);
+    changeChat(contact);
+  };
 
   return (
     <>
@@ -34,6 +37,7 @@ function Contacts({ contacts, currentUser }) {
                       index === currentSelectedChat ? "selected" : ""
                     }`}
                     key={index}
+                    onClick={()=>{changeCurrentChat(index,contact)}}
                   >
                     <div className="avatar">
                       <img

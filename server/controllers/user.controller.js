@@ -1,5 +1,4 @@
 import { User } from "../model/user.model.js";
-import bcrypt, { compareSync } from 'bcrypt'
 
 export const login=async (req,res,next)=>{
   try {
@@ -24,7 +23,7 @@ export const login=async (req,res,next)=>{
       }
       // delete user.password;
       const existedUser=await User.findOne({"email":email}).select("-password");
-      console.log(existedUser);
+      // console.log(existedUser);
       return res.json({status:true,existedUser})
   } catch (error) {
     next(error)

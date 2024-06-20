@@ -41,7 +41,7 @@ function Login() {
           password        
         });
             
-          console.log(response)
+          // console.log(response)
           if(response.data.status === false){
             toast.error(response.data.msg, toastOptions);
           }
@@ -118,7 +118,7 @@ function Login() {
 }
 
 const FormContainer = styled.div`
-  height: 100vh;
+   height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -126,7 +126,6 @@ const FormContainer = styled.div`
   gap: 1rem;
   align-items: center;
   background-color: #131324;
-
   .brand {
     display: flex;
     align-items: center;
@@ -147,7 +146,7 @@ const FormContainer = styled.div`
     gap: 2rem;
     background-color: #00000076;
     border-radius: 2rem;
-    padding: 3rem 5rem;
+    padding: 5rem;
   }
   input {
     background-color: transparent;

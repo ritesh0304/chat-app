@@ -5,20 +5,28 @@ import styled from "styled-components";
 import Picker from "emoji-picker-react";
 
 
-function ChatInput() {
+function ChatInput({handleSendMsg}) {
     const[showEmojiPicker, setShowEmojiPicker]=useState(false);
     const [msg, setMsg]=useState("")
 
     function handleEmojiPickerhideShow(){
         setShowEmojiPicker(!showEmojiPicker);
     }
-    function handleEmojiClick(event, emoji){
-     let message=msg;
-     message+=emoji.emoji;
-     setMsg(message);   
+    function handleEmojiClick(emojiObject) {
+      console.log('Emoji Object:', emojiObject);
+      const emoji = emojiObject.emoji || emojiObject.native;
+      if (emoji) {
+        setMsg((prevMsg) => prevMsg + emoji);
+      } else {
+        console.error("Emoji not found in the object", emojiObject);
+      }
     }
-    function sendChat(){
-
+    function sendChat(event){
+         event.preventDefault();
+         if(msg.length>0){
+          handleSendMsg(msg);
+          setMsg('');
+         }
     }
   return (
     <>
@@ -63,15 +71,15 @@ const Container = styled.div`
     gap: 1rem;
     .emoji {
       position: relative;
-      top:-500px;
+      // top:-500px;
       svg {
         font-size: 1.5rem;
         color: #ffff00c8;
         cursor: pointer;
       }
-      .emoji-picker-react {
+      .EmojiPickerReact{
         position: absolute;
-        top: -350px !important;
+        top: -510px !important;
         background-color: #080420;
         box-shadow: 0 5px 10px #9a86f3;
         border-color: #9a86f3;

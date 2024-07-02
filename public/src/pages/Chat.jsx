@@ -6,7 +6,7 @@ import axios from "axios";
 import { allUsersRoute, host } from "../utils/APIRoutes.js";
 import Welcome from "../components/Welcome.jsx";
 import ChatContainer from "../components/ChatContainer.jsx";
-import { io } from 'socket.io-client'
+import { io } from 'socket.io-client';
 
 function Chat() {
   const navigate = useNavigate();
@@ -36,7 +36,6 @@ function Chat() {
     }
 
     return () => {
-      // Clean up socket connection when component unmounts or dependencies change
       if (socket.current) {
         socket.current.disconnect();
       }
@@ -84,9 +83,6 @@ function Chat() {
             ) : (
               <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} />
             )}
-            {/* <div className="logout">
-              <button onClick={handleLogout}>Logout</button>
-            </div> */}
           </>
         )}
       </div>
@@ -98,6 +94,7 @@ const Container = styled.div`
   height: 100vh;
   width: 100vw;
   display: flex;
+  font-size: 14px;
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
@@ -108,9 +105,10 @@ const Container = styled.div`
     width: 85vw;
     background-color: #00000076;
     display: grid;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 30% 70%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
-      grid-template-columns: 35% 65%;
+      grid-template-columns: 25% 75%;
+      font-size: 14px;
     }
   }
 `;

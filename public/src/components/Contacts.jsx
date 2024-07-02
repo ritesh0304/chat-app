@@ -73,6 +73,24 @@ function Contacts({ contacts, currentUser , changeChat}) {
 }
 
 const Container = styled.div`
+::-webkit-scrollbar {
+    width: 12px; 
+    height: 12px; 
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 6px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
   display: grid;
   grid-template-rows: 10% 75% 15%;
   background-color: #080420;
@@ -115,6 +133,9 @@ const Container = styled.div`
       display: flex;
       gap: 1rem;
       align-items: center;
+      overflow-x:auto;
+      overflow-y:hidden;
+
       transition: 0.5s ease-in-out;
       .avatar {
         img {

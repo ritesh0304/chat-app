@@ -30,6 +30,9 @@ const Container=styled.div`
   span {
     color: #4e0eff;
   }
+    h1,h3{
+    font-size:1rem;
+    }
 `;
 
 export default Welcome

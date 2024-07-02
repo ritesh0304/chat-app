@@ -41,7 +41,6 @@ function ChatContainer({ currentChat, currentUser, socket }) {
         message: msg
       });
 
-      // Add the sent message to state immediately
       setMessages(prevMessages => [
         ...prevMessages,
         { fromSelf: true, message: msg }
@@ -53,15 +52,30 @@ function ChatContainer({ currentChat, currentUser, socket }) {
 
   useEffect(() => {
     if (socket.current) {
-      socket.current.on("msg-recieve", (message) => {
-        console.log("Received message:", message); // Debugging: Log the received message
-        setArrivalMessage({ fromSelf: false, message: message });
-      });
+      const handleMessageReceive = (data) => {
+        console.log(data);
+        console.log(currentChat);
+        console.log(currentUser);
+        console.log("Received message:", data.message); // Debugging: Log the received message
+        if (data.from === currentChat._id) {
+          console.log("Condition matched. Updating arrivalMessage.");
+          setArrivalMessage({ fromSelf: false, message: data.message });
+        } else {
+          console.log("Condition not matched. Not updating arrivalMessage.");
+        }
+      };
+
+      socket.current.on("msg-recieve", handleMessageReceive);
+
+      return () => {
+        socket.current.off("msg-recieve", handleMessageReceive);
+      };
     }
-  }, [socket]);
+  }, [socket, currentChat]);
 
   useEffect(() => {
     if (arrivalMessage) {
+      console.log(arrivalMessage);
       setMessages(prevMessages => [
         ...prevMessages,
         arrivalMessage
@@ -119,6 +133,9 @@ const Container = styled.div`
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     grid-template-rows: 15% 70% 15%;
   }
+    h1{
+    font-size:1rem;
+    }
   .chat-header {
     display: flex;
     justify-content: space-between;
@@ -161,7 +178,7 @@ const Container = styled.div`
         max-width: 40%;
         overflow-wrap: break-word;
         padding: 1rem;
-        font-size: 1.1rem;
+        font-size: 1rem;
         border-radius: 1rem;
         color: #d1d1d1;
         @media screen and (min-width: 720px) and (max-width: 1080px) {

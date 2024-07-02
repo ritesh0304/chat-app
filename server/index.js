@@ -62,7 +62,7 @@ io.on("connection", (socket) => {
         const sendUserSocket = onlineUsers.get(data.to);
         if (sendUserSocket) {
             console.log(`Sending message to user ${data.to} with socket id ${sendUserSocket}`);
-            io.to(sendUserSocket).emit("msg-recieve", data.message);
+            io.to(sendUserSocket).emit("msg-recieve", data);
         } else {
             console.log(`User ${data.to} is not online or socket not found.`);
             // Handle the case where the recipient is not online or socket ID is not found

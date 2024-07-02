@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Picker from "emoji-picker-react";
 
 
-function ChatInput({handleSendMsg}) {
+function ChatInput({handleSendMessage}) {
     const[showEmojiPicker, setShowEmojiPicker]=useState(false);
     const [msg, setMsg]=useState("")
 
@@ -13,7 +13,7 @@ function ChatInput({handleSendMsg}) {
         setShowEmojiPicker(!showEmojiPicker);
     }
     function handleEmojiClick(emojiObject) {
-      console.log('Emoji Object:', emojiObject);
+      // console.log('Emoji Object:', emojiObject);
       const emoji = emojiObject.emoji || emojiObject.native;
       if (emoji) {
         setMsg((prevMsg) => prevMsg + emoji);
@@ -24,7 +24,7 @@ function ChatInput({handleSendMsg}) {
     function sendChat(event){
          event.preventDefault();
          if(msg.length>0){
-          handleSendMsg(msg);
+          handleSendMessage(msg);
           setMsg('');
          }
     }
@@ -114,7 +114,7 @@ const Container = styled.div`
     background-color: #ffffff34;
     input {
       width: 90%;
-      height: 60%;
+      // height: 60%;
       background-color: transparent;
       color: white;
       border: none;

@@ -6,4 +6,4 @@ getAllMessage
 
 export const messageRoute =Router();
 messageRoute.post("/addMessage", addMessage);
-messageRoute.get("/getAllMessage", getAllMessage);
+messageRoute.post("/getAllMessage", getAllMessage);

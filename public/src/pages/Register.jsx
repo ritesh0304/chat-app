@@ -31,7 +31,8 @@ function Register() {
         const response = await axios.post(registerRoute, {
           username,
           email,
-          password        });
+          password        
+        });
             
           // console.log(response)
           if(response.data.status === false){

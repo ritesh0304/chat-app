@@ -39,9 +39,9 @@ userSchema.pre('save',async function(next){
     next();
 })
 userSchema.methods.isPasswordCheck=async function(password){
-    console.log(password, this.password)
+    // console.log(password, this.password)
     const x=await bcrypt.compare(password,this.password );
-    console.log(x);
+    // console.log(x);
     return x;
 }
 export const User=mongoose.model("User",userSchema);
